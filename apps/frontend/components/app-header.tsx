@@ -1,6 +1,4 @@
 "use client";
-
-import * as React from "react";
 import Link from "next/link";
 import {
   Building2,
@@ -9,7 +7,6 @@ import {
   LogOut,
   User,
   Grid3X3,
-  Check,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -35,17 +32,9 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 
 /* ---- App Drawer apps list ---- */
-const ORGS = ["Acme Corp", "Global HQ", "APAC Division", "EU Operations"];
-
 export function AppHeader() {
   const { session, tenant, activeModuleId } = useAppSession();
-  const [org, setOrg] = React.useState("Acme Corp");
-
-  React.useEffect(() => {
-    if (tenant?.name) {
-      setOrg(tenant.name);
-    }
-  }, [tenant?.name]);
+  const orgName = tenant?.name ?? "Acme Corp";
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border bg-background px-6 gap-4">
@@ -95,54 +84,34 @@ export function AppHeader() {
         {/* Brand mark + title */}
         <div className="flex items-center gap-3">
           <div
-            className="flex h-8 w-8 items-center justify-center rounded"
-            style={{ background: "var(--orion-yellow, #F5C842)" }}
+            className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-md border shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_2px_8px_rgba(0,0,0,0.16)]"
+            style={{
+              borderColor: "color-mix(in oklch, var(--border) 70%, #f5c842 30%)",
+              background:
+                "linear-gradient(140deg, color-mix(in oklch, #f5c842 88%, white 12%) 0%, #f5c842 55%, color-mix(in oklch, #f5c842 82%, black 18%) 100%)",
+            }}
           >
-            <span className="text-sm font-bold leading-none" style={{ color: "#111110" }}>
+            <div className="absolute inset-[3px] rounded-[5px] border border-black/10" />
+            <span className="relative text-sm font-extrabold tracking-tight leading-none text-[#111110]">
               S
             </span>
           </div>
-          <span className="hidden sm:block text-sm font-semibold tracking-tight truncate max-w-xs">
-            SOSO
-            <span className="hidden lg:inline font-normal text-muted-foreground ml-1 text-xs">
+
+          <div className="hidden sm:flex flex-col leading-none">
+            <span className="text-sm font-semibold tracking-tight">SOSO</span>
+            <span className="mt-1 text-[11px] font-normal text-muted-foreground">
               Strategy Operating System for Organizations
             </span>
-          </span>
+          </div>
         </div>
 
         <Separator orientation="vertical" className="h-5 hidden sm:block" />
 
-        {/* Org selector */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-8 gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              <Building2 className="h-3.5 w-3.5 shrink-0" />
-              <span className="hidden sm:inline">{org}</span>
-              <ChevronDown className="h-3 w-3 opacity-50" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="min-w-[180px]">
-            <DropdownMenuLabel className="text-xs text-muted-foreground">
-              Switch Organization
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {ORGS.map((o) => (
-              <DropdownMenuItem
-                key={o}
-                onClick={() => setOrg(o)}
-                className="flex items-center gap-2 cursor-pointer"
-              >
-                <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
-                <span>{o}</span>
-                {o === org && <Check className="h-3.5 w-3.5 ml-auto text-primary" />}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {/* Organization name (read-only) */}
+        <div className="inline-flex h-8 items-center gap-2 rounded-md border border-border px-3 text-sm font-medium text-muted-foreground">
+          <Building2 className="h-3.5 w-3.5 shrink-0" />
+          <span className="hidden sm:inline">{orgName}</span>
+        </div>
       </div>
 
       {/* ── RIGHT ── */}

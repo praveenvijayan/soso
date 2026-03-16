@@ -5,5 +5,27 @@
   "projectType": "application",
   "tags": [],
   "// targets": "to see all targets run: nx show project frontend --web",
-  "targets": {}
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/frontend",
+        "command": "next dev --webpack"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/frontend",
+        "command": "next build --webpack"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/frontend",
+        "command": "next start"
+      }
+    }
+  }
 }

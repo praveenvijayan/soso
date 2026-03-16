@@ -1,5 +1,4 @@
-import { ModuleNavigation } from "@/shared/ui/shell/module-navigation";
-import { PageHeader } from "@/shared/ui/shell/page-header";
+import { ExecutiveDashboardScreen } from "@/modules/platform/screens/executive-dashboard-screen";
 
 export default async function OrganizationHomePage({
   params,
@@ -8,14 +7,5 @@ export default async function OrganizationHomePage({
 }) {
   const { orgSlug } = await params;
 
-  return (
-    <div className="space-y-8">
-      <PageHeader
-        eyebrow="Tenant workspace"
-        title="Domain modules"
-        description="Each domain owns its screens, workflows, business rules, permissions, schema boundaries, and service clients while sharing platform services."
-      />
-      <ModuleNavigation orgSlug={orgSlug} />
-    </div>
-  );
+  return <ExecutiveDashboardScreen orgSlug={orgSlug} />;
 }
