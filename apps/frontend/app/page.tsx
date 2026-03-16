@@ -1,29 +1,23 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function Index() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-50 p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Welcome to Nx + Shadcn UI</CardTitle>
-          <CardDescription>Enter your email below to subscribe.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Input id="email" placeholder="Email address" type="email" />
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Subscribe</Button>
-        </CardFooter>
-      </Card>
+    <div className="flex min-h-screen items-center justify-center bg-background p-6">
+      <div className="w-full max-w-2xl rounded-[2rem] border border-border/70 bg-card/90 p-8 shadow-[0_18px_60px_rgba(77,52,24,0.08)]">
+        <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">SOSO frontend architecture</p>
+        <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">Tenant-scoped modular monolith</h1>
+        <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">
+          Domain modules now live behind organization-scoped routes, backed by a typed module registry, shared platform context, and module-owned screens and service clients.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground" href="/org/acme-corp">
+            Open tenant workspace
+          </Link>
+          <Link className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium" href="/ui-showcase">
+            Open UI showcase
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,1 @@
+export const PLATFORM_COLLABORATION_SERVICES_ROUTE_BASE = "platform";

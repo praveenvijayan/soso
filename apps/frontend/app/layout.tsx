@@ -1,6 +1,7 @@
 import './global.css';
 import './orion.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AppSessionProvider } from '@/modules/platform/context/app-session-provider';
 
 export const metadata = {
   title: 'SOSO',
@@ -38,7 +39,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          {children}
+          <AppSessionProvider>{children}</AppSessionProvider>
         </ThemeProvider>
       </body>
     </html>

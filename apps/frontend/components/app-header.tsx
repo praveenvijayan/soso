@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
   Building2,
   ChevronDown,
@@ -14,6 +15,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { useAppSession } from "@/modules/platform/context/app-session-provider";
+import { moduleRegistry } from "@/modules/registry";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,25 +35,17 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 
 /* ---- App Drawer apps list ---- */
-const DRAWER_APPS = [
-  { name: "Vision & Strategic Intent", icon: "◎" },
-  { name: "Corporate Strategy",        icon: "▦" },
-  { name: "Strategic Planning",        icon: "⌂", active: true },
-  { name: "Initiative & Program Portfolio", icon: "⋮⋮" },
-  { name: "Business Unit Alignment",   icon: "👥" },
-  { name: "Operating Model",           icon: "⊞" },
-  { name: "Financial Strategy & Budget", icon: "$" },
-  { name: "Risk & Compliance Mgmt",    icon: "⛨" },
-  { name: "Governance & Decision Mgmt", icon: "✓" },
-  { name: "KPI & Performance Mgmt",   icon: "⤢" },
-  { name: "Executive Intelligence",    icon: "▲" },
-  { name: "Platform & Collab Services", icon: "◈" },
-];
-
 const ORGS = ["Acme Corp", "Global HQ", "APAC Division", "EU Operations"];
 
 export function AppHeader() {
+  const { session, tenant, activeModuleId } = useAppSession();
   const [org, setOrg] = React.useState("Acme Corp");
+
+  React.useEffect(() => {
+    if (tenant?.name) {
+      setOrg(tenant.name);
+    }
+  }, [tenant?.name]);
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border bg-background px-6 gap-4">
@@ -76,20 +71,21 @@ export function AppHeader() {
             </SheetHeader>
             <div className="flex-1 overflow-y-auto p-6">
               <div className="grid grid-cols-2 gap-3">
-                {DRAWER_APPS.map((app) => (
-                  <button
-                    key={app.name}
+                {moduleRegistry.map((module) => (
+                  <Link
+                    key={module.id}
+                    href={`/org/${tenant?.slug ?? "acme-corp"}/${module.routeBase}`}
                     className={[
                       "flex flex-col gap-4 p-5 rounded-xl border text-left transition-all duration-200",
                       "hover:shadow-md hover:-translate-y-1 hover:border-foreground/30",
-                      app.active
+                      activeModuleId === module.id
                         ? "border-foreground/60 bg-muted text-foreground"
                         : "border-border bg-muted/40 text-muted-foreground hover:text-foreground",
                     ].join(" ")}
                   >
-                    <span className="text-xl leading-none">{app.icon}</span>
-                    <span className="text-xs font-medium leading-snug">{app.name}</span>
-                  </button>
+                    <module.icon className="h-5 w-5" />
+                    <span className="text-xs font-medium leading-snug">{module.label}</span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -185,8 +181,8 @@ export function AppHeader() {
           <DropdownMenuContent align="end" className="min-w-[180px]">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col gap-0.5">
-                <span className="text-sm font-semibold">John Smith</span>
-                <span className="text-xs text-muted-foreground">john@acmecorp.com</span>
+                <span className="text-sm font-semibold">{session?.user?.fullName ?? "John Smith"}</span>
+                <span className="text-xs text-muted-foreground">{session?.user?.email ?? "john@acmecorp.com"}</span>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
