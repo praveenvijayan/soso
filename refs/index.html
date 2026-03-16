@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITStar · App Launchpad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Prevents FOUC by setting theme immediately
+    const theme = localStorage.getItem('orion-theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark-theme');
+    } else if (theme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- UNIVERSAL HEADER -->
+    <header class="universal-header">
+      <div class="header-left">
+        <a href="index.html" class="app-logo">
+          <button class="app-mark drawer-toggle" style="background:transparent; border:none; padding:0; cursor:pointer;"
+            aria-label="Open App Drawer">
+            <svg viewBox="0 0 40 40" fill="none" style="width:20px;height:20px">
+              <circle cx="20" cy="20" r="16" stroke="#111110" stroke-width="2.5" />
+              <path d="M12 20h16M20 12v16" stroke="#111110" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+          </button>
+          <span class="app-title">SOSO (Strategy Operating System for organizations)</span>
+        </a>
+
+        <div class="project-selector">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          </svg>
+          <span class="label">Acme Corp</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.6">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="org-management.html" class="btn btn-ghost btn-sm btn-icon" aria-label="Tenant Management">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+        </a>
+        <button id="theme-toggle" class="btn btn-ghost btn-sm btn-icon" aria-label="Toggle theme">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <div class="user-profile">
+          <div class="avatar">JS</div>
+          <a href="login.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Log out</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <div class="app-grid">
+
+        <h1 class="launchpad-title">Organizational Strategy Overview</h1>
+        <p class="launchpad-desc">Global snapshot of strategic execution, risks, and alignment.</p>
+      </div>
+
+      <div class="soso-grid">
+
+        <!-- ==============================================
+           SECTION 1: Organization Summary (col-span-12)
+           ============================================== -->
+        <div class="card col-span-12"
+          style="background: var(--orion-surface-1); border:none; display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--space-6); padding:var(--space-6) var(--space-8);">
+          <div>
+            <div style="font-size:var(--text-sm); color:var(--orion-text-secondary); margin-bottom:var(--space-1)">Total
+              Headcount</div>
+            <div style="font-size:var(--text-3xl); font-weight:var(--weight-semibold); letter-spacing:-0.02em;">14,250
+            </div>
+            <div class="metric-delta up" style="font-size:var(--text-xs); margin-top:var(--space-1)">+1.2% YTD</div>
+          </div>
+          <div style="width:1px; background:var(--orion-border-base); margin:0 var(--space-4);"></div>
+          <div>
+            <div style="font-size:var(--text-sm); color:var(--orion-text-secondary); margin-bottom:var(--space-1)">
+              Active Sub-Orgs</div>
+            <div style="font-size:var(--text-3xl); font-weight:var(--weight-semibold); letter-spacing:-0.02em;">8</div>
+          </div>
+          <div style="width:1px; background:var(--orion-border-base); margin:0 var(--space-4);"></div>
+          <div>
+            <div style="font-size:var(--text-sm); color:var(--orion-text-secondary); margin-bottom:var(--space-1)">
+              Global Offices</div>
+            <div style="font-size:var(--text-3xl); font-weight:var(--weight-semibold); letter-spacing:-0.02em;">32</div>
+          </div>
+          <div style="width:1px; background:var(--orion-border-base); margin:0 var(--space-4);"></div>
+          <div style="flex:1; min-width:200px; display:flex; flex-direction:column; justify-content:center;">
+            <div
+              style="display:flex; justify-content:space-between; font-size:var(--text-sm); font-weight:var(--weight-medium); margin-bottom:var(--space-2)">
+              <span>Q1 OPEX Target</span>
+              <span style="font-family:var(--font-mono)">$142M / $150M</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:94%; background:var(--orion-info)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 2: Strategic Cycle Progress (col-span-8)
+           ============================================== -->
+        <div class="card col-span-8" style="display:flex; flex-direction:column;">
+          <div class="card-header">
+            <span class="card-title">Fiscal Year 2026 Strategy Execution</span>
+            <span class="badge badge-yellow">Q1 In Progress</span>
+          </div>
+          <div class="card-body"
+            style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:var(--space-6)">
+            <div style="text-align:center;">
+              <div
+                style="font-size:clamp(3rem, 5vw, 4.5rem); font-weight:300; letter-spacing:-0.04em; color:var(--orion-text-primary); line-height:1">
+                42%</div>
+              <div style="font-size:var(--text-sm); color:var(--orion-text-secondary); margin-top:var(--space-2)">
+                Overall completion against FY26 strategic goals</div>
+            </div>
+
+            <div style="position:relative; margin-top:var(--space-4)">
+              <div class="progress-bar large" style="background:var(--orion-surface-2)">
+                <div class="progress-fill" style="width:42%; background:var(--orion-text-primary)"></div>
+              </div>
+              <!-- Timeline markers -->
+              <div
+                style="display:flex; justify-content:space-between; position:absolute; top:-6px; left:0; width:100%;">
+                <div class="timeline-node active"></div>
+                <div class="timeline-node active"></div>
+                <div class="timeline-node"
+                  style="background:var(--orion-surface-0); border:2px solid var(--orion-border-strong);"></div>
+                <div class="timeline-node"></div>
+                <div class="timeline-node"></div>
+              </div>
+              <div
+                style="display:flex; justify-content:space-between; margin-top:var(--space-3); font-size:10px; color:var(--orion-text-tertiary); font-weight:var(--weight-medium); text-transform:uppercase; letter-spacing:0.05em;">
+                <span>Q1 Start</span>
+                <span>Q2 Start</span>
+                <span style="color:var(--orion-text-primary)">Mid-Year</span>
+                <span>Q4 Start</span>
+                <span>FY End</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 3: Pillar Status (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4">
+          <div class="card-header">
+            <span class="card-title">Core Pillars</span>
+          </div>
+          <div class="card-body" style="display:flex; flex-direction:column; gap:var(--space-4);">
+
+            <!-- Pillar 1 -->
+            <div
+              style="padding:var(--space-4); border:1px solid var(--orion-border-subtle); border-radius:var(--radius-lg); background:var(--orion-surface-0)">
+              <div
+                style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-3)">
+                <div>
+                  <div style="font-weight:var(--weight-semibold); font-size:var(--text-base)">Market Expansion</div>
+                  <div style="font-size:var(--text-xs); color:var(--orion-text-secondary)">APAC Region Focus</div>
+                </div>
+                <span class="badge badge-success badge-dot">On Track</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-xs)">
+                <div style="flex:1">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:65%"></div>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-mono)">65%</span>
+              </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div
+              style="padding:var(--space-4); border:1px solid var(--orion-yellow); border-radius:var(--radius-lg); background:rgba(245,200,66,0.05);">
+              <div
+                style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-3)">
+                <div>
+                  <div style="font-weight:var(--weight-semibold); font-size:var(--text-base)">Digital Transformation
+                  </div>
+                  <div style="font-size:var(--text-xs); color:var(--orion-text-secondary)">Legacy Migration</div>
+                </div>
+                <span class="badge" style="background:var(--orion-warning-bg); color:var(--orion-warning)">At
+                  Risk</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-xs)">
+                <div style="flex:1">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:28%; background:var(--orion-warning)"></div>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-mono)">28%</span>
+              </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div
+              style="padding:var(--space-4); border:1px solid var(--orion-border-subtle); border-radius:var(--radius-lg); background:var(--orion-surface-0)">
+              <div
+                style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-3)">
+                <div>
+                  <div style="font-weight:var(--weight-semibold); font-size:var(--text-base)">Operational Excellence
+                  </div>
+                  <div style="font-size:var(--text-xs); color:var(--orion-text-secondary)">Supply Chain Opt.</div>
+                </div>
+                <span class="badge badge-success badge-dot">On Track</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-xs)">
+                <div style="flex:1">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:82%"></div>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-mono)">82%</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 4: Initiative Portfolio (col-span-8)
+           ============================================== -->
+        <div class="card col-span-8">
+          <div class="card-header">
+            <span class="card-title">Top Strategic Initiatives (Q1)</span>
+            <button class="btn btn-ghost btn-sm">View All</button>
+          </div>
+          <div class="card-body" style="padding:0">
+            <table style="width:100%; border-collapse:collapse; text-align:left; font-size:var(--text-sm)">
+              <thead>
+                <tr
+                  style="border-bottom:1px solid var(--orion-border-strong); color:var(--orion-text-secondary); font-size:var(--text-xs)">
+                  <th style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Initiative</th>
+                  <th style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Owner</th>
+                  <th style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Status</th>
+                  <th style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium); text-align:right">
+                    Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--orion-border-subtle)">
+                  <td style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Project Phoenix
+                    (ERP Upgrade)</td>
+                  <td style="padding:var(--space-3) var(--space-4); color:var(--orion-text-secondary)">Sarah Jenkins
+                  </td>
+                  <td style="padding:var(--space-3) var(--space-4)"><span class="badge badge-success badge-dot">On
+                      Track</span></td>
+                  <td style="padding:var(--space-3) var(--space-4); text-align:right; font-family:var(--font-mono)">45%
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--orion-border-subtle)">
+                  <td style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Global Zero Trust
+                    Rollout</td>
+                  <td style="padding:var(--space-3) var(--space-4); color:var(--orion-text-secondary)">Marcus Cole</td>
+                  <td style="padding:var(--space-3) var(--space-4)"><span class="badge"
+                      style="background:var(--orion-warning-bg); color:var(--orion-warning)">Delayed</span></td>
+                  <td style="padding:var(--space-3) var(--space-4); text-align:right; font-family:var(--font-mono)">78%
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--orion-border-subtle)">
+                  <td style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Data Lake
+                    Consolidation</td>
+                  <td style="padding:var(--space-3) var(--space-4); color:var(--orion-text-secondary)">Elena Rostova
+                  </td>
+                  <td style="padding:var(--space-3) var(--space-4)"><span class="badge badge-success badge-dot">On
+                      Track</span></td>
+                  <td style="padding:var(--space-3) var(--space-4); text-align:right; font-family:var(--font-mono)">12%
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:var(--space-3) var(--space-4); font-weight:var(--weight-medium)">Vendor
+                    Rationalization</td>
+                  <td style="padding:var(--space-3) var(--space-4); color:var(--orion-text-secondary)">David Chen</td>
+                  <td style="padding:var(--space-3) var(--space-4)"><span class="badge"
+                      style="background:var(--orion-danger-bg); color:var(--orion-danger)">At Risk</span></td>
+                  <td style="padding:var(--space-3) var(--space-4); text-align:right; font-family:var(--font-mono)">5%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 5: Budget Alignment (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4" style="display:flex; flex-direction:column;">
+          <div class="card-header">
+            <span class="card-title">Budget Alignment</span>
+            <button class="btn btn-icon btn-ghost btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
+              </svg>
+            </button>
+          </div>
+          <div class="card-body" style="flex:1; display:flex; flex-direction:column; gap:var(--space-4);">
+            <div style="font-size:var(--text-sm); color:var(--orion-text-secondary)">Spend vs Strategic Allocation
+              (FY26)</div>
+
+            <div style="flex:1; display:flex; flex-direction:column; gap:var(--space-4); justify-content:center;">
+              <div>
+                <div
+                  style="display:flex; justify-content:space-between; font-size:var(--text-xs); margin-bottom:var(--space-1)">
+                  <span>Run (KTLO) - Target 60%</span>
+                  <span style="font-family:var(--font-mono); font-weight:var(--weight-semibold)">68%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width:68%; background:var(--orion-text-secondary)"></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="display:flex; justify-content:space-between; font-size:var(--text-xs); margin-bottom:var(--space-1)">
+                  <span>Grow (Expansion) - Target 25%</span>
+                  <span style="font-family:var(--font-mono); font-weight:var(--weight-semibold)">20%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width:20%; background:var(--orion-info)"></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="display:flex; justify-content:space-between; font-size:var(--text-xs); margin-bottom:var(--space-1)">
+                  <span>Transform (Innovation) - Target 15%</span>
+                  <span style="font-family:var(--font-mono); font-weight:var(--weight-semibold)">12%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width:12%; background:var(--orion-yellow-dark)"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert alert-warning" style="margin-top:var(--space-2)">
+              <div class="alert-body">
+                <div class="alert-desc" style="font-size:11px">KTLO spend is tracking 8% above target, squeezing
+                  transformational investments.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 6: Risk Heatmap (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4">
+          <div class="card-header">
+            <span class="card-title">Enterprise Risk Heatmap</span>
+          </div>
+          <div class="card-body" style="display:flex; flex-direction:column; align-items:center;">
+            <div class="heatmap-grid" style="margin-bottom:var(--space-2)">
+              <!-- Y Label -->
+              <div class="heatmap-y-label">Impact (High to Low)</div>
+
+              <!-- Row 1 (Highest Impact) -->
+              <div class="heat-cell heat-med"></div>
+              <div class="heat-cell heat-high"></div>
+              <div class="heat-cell heat-critical">1</div>
+              <div class="heat-cell heat-critical"></div>
+              <div class="heat-cell heat-critical"></div>
+
+              <!-- Row 2 -->
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-med"></div>
+              <div class="heat-cell heat-high">2</div>
+              <div class="heat-cell heat-critical"></div>
+              <div class="heat-cell heat-critical"></div>
+
+              <!-- Row 3 -->
+              <div class="heat-cell heat-low">3</div>
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-med"></div>
+              <div class="heat-cell heat-high">1</div>
+              <div class="heat-cell heat-critical"></div>
+
+              <!-- Row 4 -->
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-low">1</div>
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-med"></div>
+              <div class="heat-cell heat-high"></div>
+
+              <!-- Row 5 (Lowest Impact) -->
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-low"></div>
+              <div class="heat-cell heat-med">2</div>
+
+              <!-- X Label -->
+              <div class="heatmap-x-label">Probability (Low to High)</div>
+            </div>
+            <div
+              style="font-size:10px; color:var(--orion-text-secondary); text-align:center; margin-top:var(--space-2)">
+              Displaying Top 10 Active Risks
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 7: Governance Approvals Pending (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4">
+          <div class="card-header">
+            <span class="card-title">Pending Governance Approvals</span>
+            <span class="badge badge-yellow">3.</span>
+          </div>
+          <div class="card-body">
+            <div class="feed-list">
+              <div class="feed-item">
+                <div class="feed-icon" style="color:var(--orion-info)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">Cloud Architecture Review: AI Services Hub</div>
+                  <div class="feed-meta">Requested by E. Rostova • 2 days ago</div>
+                  <div style="margin-top:var(--space-2); display:flex; gap:var(--space-2)">
+                    <button class="btn btn-primary btn-sm" style="flex:1">Review</button>
+                  </div>
+                </div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-icon" style="color:var(--orion-text-primary)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">Budget Release: Q2 Expansion Fund</div>
+                  <div class="feed-meta">Requested by Finance • 3 days ago</div>
+                </div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-icon" style="color:var(--orion-warning)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">Exception Request: Legacy Vendor Access</div>
+                  <div class="feed-meta">Requested by BU-4 • 5 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 8: Cross-Domain Dependencies (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4">
+          <div class="card-header">
+            <span class="card-title">Cross-Domain Blockers</span>
+          </div>
+          <div class="card-body">
+            <div class="feed-list">
+
+              <div
+                style="padding:var(--space-3); border:1px solid var(--orion-danger); border-radius:var(--radius-md); background:var(--orion-danger-bg)">
+                <div
+                  style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-1)">
+                  <span
+                    style="font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--orion-danger)">API
+                    Gateway Migration</span>
+                  <span
+                    style="font-size:10px; font-weight:600; padding:2px 6px; background:var(--orion-danger); color:white; border-radius:var(--radius-pill)">BLOCKED</span>
+                </div>
+                <p style="font-size:var(--text-xs); color:var(--orion-text-secondary); line-height:1.4">Waiting on
+                  Security Operations team to approve new firewall rules in the APAC region.</p>
+                <div
+                  style="margin-top:var(--space-2); font-size:10px; font-weight:600; color:var(--orion-text-primary)">
+                  Owner: Network Architecture</div>
+              </div>
+
+              <div
+                style="padding:var(--space-3); border:1px solid var(--orion-warning); border-radius:var(--radius-md); background:var(--orion-warning-bg)">
+                <div
+                  style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-1)">
+                  <span
+                    style="font-size:var(--text-sm); font-weight:var(--weight-semibold); color:var(--orion-warning)">Customer
+                    Portal v2</span>
+                  <span
+                    style="font-size:10px; font-weight:600; padding:2px 6px; background:var(--orion-warning); color:white; border-radius:var(--radius-pill)">AT
+                    RISK</span>
+                </div>
+                <p style="font-size:var(--text-xs); color:var(--orion-text-secondary); line-height:1.4">Database team is
+                  2 weeks behind schedule on providing the unified data schema.</p>
+                <div
+                  style="margin-top:var(--space-2); font-size:10px; font-weight:600; color:var(--orion-text-primary)">
+                  Owner: Database Eng</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+           SECTION 9: Executive Alerts (col-span-4)
+           ============================================== -->
+        <div class="card col-span-4" style="border:2px solid var(--orion-yellow)">
+          <div class="card-header">
+            <span class="card-title">Executive Alerts &amp; Updates</span>
+          </div>
+          <div class="card-body">
+            <div class="feed-list">
+
+              <div class="feed-item" style="align-items:flex-start;">
+                <div
+                  style="margin-top:4px; width:8px; height:8px; border-radius:50%; background:var(--orion-danger); flex-shrink:0;">
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">Major Outage: EU-West Database Engine</div>
+                  <div class="feed-meta" style="color:var(--orion-danger)">Ongoing • Triggered 45m ago</div>
+                  <p style="font-size:var(--text-xs); color:var(--orion-text-secondary); margin-top:2px;">Failover
+                    process to secondary zone initiated. Root cause analysis pending.</p>
+                </div>
+              </div>
+
+              <div class="feed-item" style="align-items:flex-start;">
+                <div
+                  style="margin-top:4px; width:8px; height:8px; border-radius:50%; background:var(--orion-success); flex-shrink:0;">
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">SLA Recovered: APAC Payment Gateway</div>
+                  <div class="feed-meta">Resolved • 2 hours ago</div>
+                  <p style="font-size:var(--text-xs); color:var(--orion-text-secondary); margin-top:2px;">Network
+                    routing issue resolved, latency back within 100ms threshold.</p>
+                </div>
+              </div>
+
+              <div class="feed-item" style="align-items:flex-start;">
+                <div
+                  style="margin-top:4px; width:8px; height:8px; border-radius:50%; background:var(--orion-info); flex-shrink:0;">
+                </div>
+                <div class="feed-content">
+                  <div class="feed-title">Board Meeting Prep Due</div>
+                  <div class="feed-meta">Action Required • Due tomorrow</div>
+                  <p style="font-size:var(--text-xs); color:var(--orion-text-secondary); margin-top:2px;">Finalize Q1
+                    strategic cycle execution summary presentation for the steering committee.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- UNIVERSAL FOOTER -->
+    <footer class="universal-footer">
+      <div>&copy; 2026 Orion IT Solutions. All rights reserved.</div>
+      <div style="display:flex;gap:var(--space-4)">
+        <a href="#" style="color:inherit;text-decoration:none">Privacy Policy</a>
+        <a href="#" style="color:inherit;text-decoration:none">Terms of Service</a>
+        <a href="#" style="color:inherit;text-decoration:none">Help Center</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==============================================
+       APP DRAWER 
+       ============================================== -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="app-drawer" id="appDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        Domain Apps
+      </div>
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-grid">
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Vision & Strategic Intent</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="3" x2="9" y2="21"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Corporate Strategy</span>
+        </a>
+
+        <a href="index.html" class="drawer-app-card active">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Strategic Planning</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Initiative & Program Portfolio</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Business Unit Alignment</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="14" x2="23" y2="14"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Operating Model</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Financial Strategy & Budget</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Risk & Compliance Mgmt</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"></polyline>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Governance & Decision Mgmt</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <span class="drawer-app-name">KPI & Performance Mgmt</span>
+        </a>
+
+        <a href="it-strategy.html" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Executive Intelligence Dashboard</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+              </path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Platform & Collab Services</span>
+        </a>
+
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // Drawer Logic
+    const drawerToggleBtns = document.querySelectorAll('.drawer-toggle');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const appDrawer = document.getElementById('appDrawer');
+    const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+    function openDrawer(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      drawerOverlay.classList.add('open');
+      appDrawer.classList.add('open');
+    }
+
+    function closeDrawer() {
+      drawerOverlay.classList.remove('open');
+      appDrawer.classList.remove('open');
+    }
+
+    drawerToggleBtns.forEach(btn => btn.addEventListener('click', openDrawer));
+    drawerOverlay.addEventListener('click', closeDrawer);
+    drawerCloseBtn.addEventListener('click', closeDrawer);
+
+    // Escape key closes drawer
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && appDrawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    // Theme Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+    const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+    const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+    function updateIcons() {
+      const isDark = htmlEl.classList.contains('dark-theme') ||
+        (!htmlEl.classList.contains('light-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+
+    // Set initial icon state
+    updateIcons();
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = htmlEl.classList.contains('dark-theme') ||
+        (!htmlEl.classList.contains('light-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      if (isDark) {
+        htmlEl.classList.remove('dark-theme');
+        htmlEl.classList.add('light-theme');
+        localStorage.setItem('orion-theme', 'light');
+      } else {
+        htmlEl.classList.remove('light-theme');
+        htmlEl.classList.add('dark-theme');
+        localStorage.setItem('orion-theme', 'dark');
+      }
+      updateIcons();
+    });
+  </script>
+</body>
+
+</html>

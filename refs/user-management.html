@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITStar · Tenant Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Prevents FOUC by setting theme immediately
+    const theme = localStorage.getItem('orion-theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark-theme');
+    } else if (theme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- Universal Top Header -->
+    <header class="universal-header">
+      <div class="header-left">
+        <a href="index.html" class="app-logo">
+          <button class="app-mark drawer-toggle" style="background:transparent; border:none; padding:0; cursor:pointer;"
+            aria-label="Open App Drawer">
+            <svg viewBox="0 0 40 40" fill="none" style="width:20px;height:20px">
+              <circle cx="20" cy="20" r="16" stroke="#111110" stroke-width="2.5" />
+              <path d="M12 20h16M20 12v16" stroke="#111110" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+          </button>
+          <span class="app-title">Tenant Management</span>
+        </a>
+
+        <div class="project-selector">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          </svg>
+          <span class="label">System Admin</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.6">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="index.html" class="btn btn-ghost btn-sm btn-icon" aria-label="Dashboard Home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </a>
+        <a href="org-management.html" class="btn btn-ghost btn-sm btn-icon" aria-label="Tenant Management">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+        </a>
+        <button id="theme-toggle" class="btn btn-ghost btn-sm btn-icon" aria-label="Toggle theme">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <div class="user-profile">
+          <div class="avatar"
+            style="width:32px; height:32px; background:var(--orion-surface-3); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:var(--weight-semibold); color:var(--orion-text-primary);">
+            SA</div>
+          <a href="login.html" class="btn btn-ghost btn-sm" style="text-decoration:none;">Log out</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="padding-top: var(--space-8);">
+
+      <div style="max-width: var(--container-max); margin: 0 auto; width: 100%;">
+
+        <!-- Page Header -->
+        <div
+          style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-8);">
+          <div>
+            <h1 class="launchpad-title" style="margin-bottom: var(--space-2);">User Management</h1>
+            <p class="launchpad-desc" style="margin: 0; max-width: 600px;">Manage organization members, assign roles, and review recent activity sessions.</p>
+          </div>
+          <div style="display: flex; gap: var(--space-3);">
+            <button class="btn btn-secondary">Export Users</button>
+            <button class="btn btn-primary">+ Invite User</button>
+          </div>
+        </div>
+
+        <!-- KPI Summary Row -->
+        <div class="soso-grid" style="margin-bottom: var(--space-8);">
+          <div class="card col-span-3">
+            <div class="card-body">
+              <div class="metric-card-label">Total Users</div>
+              <div class="metric-card-value">1,248</div>
+              <div class="metric-delta up" style="margin-top: var(--space-2);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                +24 this week
+              </div>
+            </div>
+          </div>
+
+          <div class="card col-span-3">
+            <div class="card-body">
+              <div class="metric-card-label">Active Sessions</div>
+              <div class="metric-card-value">312</div>
+              <div class="metric-delta" style="margin-top: var(--space-2);">
+                <span class="metric-secondary">Currently online</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card col-span-3">
+            <div class="card-body">
+              <div class="metric-card-label">Pending Invites</div>
+              <div class="metric-card-value">18</div>
+              <div class="metric-delta" style="margin-top: var(--space-2);">
+                <span class="metric-secondary">Not yet accepted</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card col-span-3">
+            <div class="card-body">
+              <div class="metric-card-label">Admin Roles</div>
+              <div class="metric-card-value">42</div>
+              <div class="metric-delta up" style="margin-top: var(--space-2);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                across 14 tenants
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Settings Tabs -->
+        <nav class="tabs-nav">
+          <a href="org-management.html" class="tab-link">Tenants</a>
+          <a href="#" class="tab-link active">Users</a>
+          <a href="#" class="tab-link">Roles & Permissions</a>
+          <a href="#" class="tab-link">Billing</a>
+          <a href="#" class="tab-link">Integrations</a>
+          <a href="#" class="tab-link">System Settings</a>
+        </nav>
+
+        <!-- Management Table -->
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Tenant</th>
+                <th>Last Active</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar" style="width:36px; height:36px; background:var(--orion-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight:var(--weight-semibold);">JD</div>
+                    <div style="display:flex; flex-direction:column;">
+                      <span style="font-weight:var(--weight-semibold); color:var(--orion-text-primary);">Jane Doe</span>
+                      <span style="font-size:var(--text-xs); color:var(--orion-text-tertiary);">jane@acmecorp.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-secondary);">Tenant Admin</span></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>Acme Corp</td>
+                <td style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-tertiary);">2 mins ago</td>
+                <td style="text-align: right;">
+                  <button class="btn btn-ghost btn-sm manageBtn" data-name="Jane Doe" data-email="jane@acmecorp.com" data-initials="JD" data-color="var(--orion-blue)" data-role="Tenant Admin" data-tenant="Acme Corp" data-status="Active" data-status-class="badge-success" data-last-active="2 mins ago">Edit</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar" style="width:36px; height:36px; background:var(--orion-green); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight:var(--weight-semibold);">AS</div>
+                    <div style="display:flex; flex-direction:column;">
+                      <span style="font-weight:var(--weight-semibold); color:var(--orion-text-primary);">Alice Smith</span>
+                      <span style="font-size:var(--text-xs); color:var(--orion-text-tertiary);">alice@acmecorp.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-secondary);">Editor</span></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>Acme Corp</td>
+                <td style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-tertiary);">1 hour ago</td>
+                <td style="text-align: right;">
+                  <button class="btn btn-ghost btn-sm manageBtn" data-name="Alice Smith" data-email="alice@acmecorp.com" data-initials="AS" data-color="var(--orion-green)" data-role="Editor" data-tenant="Acme Corp" data-status="Active" data-status-class="badge-success" data-last-active="1 hour ago">Edit</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar" style="width:36px; height:36px; background:var(--orion-surface-2); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--orion-text-secondary); font-size:12px; font-weight:var(--weight-semibold);">MR</div>
+                    <div style="display:flex; flex-direction:column;">
+                      <span style="font-weight:var(--weight-semibold); color:var(--orion-text-primary);">Mark Roberts</span>
+                      <span style="font-size:var(--text-xs); color:var(--orion-text-tertiary);">mark@globex.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-secondary);">Viewer</span></td>
+                <td><span class="badge badge-warning">Invited</span></td>
+                <td>Globex Inc</td>
+                <td style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-tertiary);">Never</td>
+                <td style="text-align: right;">
+                  <button class="btn btn-ghost btn-sm manageBtn" data-name="Mark Roberts" data-email="mark@globex.com" data-initials="MR" data-color="var(--orion-surface-2)" data-role="Viewer" data-tenant="Globex Inc" data-status="Invited" data-status-class="badge-warning" data-last-active="Never">Resend</button>
+                </td>
+              </tr>
+
+              <tr style="opacity: 0.6;">
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar" style="width:36px; height:36px; background:var(--orion-surface-2); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--orion-text-secondary); font-size:12px; font-weight:var(--weight-semibold);">WB</div>
+                    <div style="display:flex; flex-direction:column;">
+                      <span style="font-size:var(--text-sm); color:var(--orion-text-secondary); text-decoration:line-through;">William Bell</span>
+                      <span style="font-size:var(--text-xs); color:var(--orion-text-tertiary);">william@massivedynamic.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-secondary);">Tenant Admin</span></td>
+                <td><span class="badge badge-neutral">Suspended</span></td>
+                <td>Massive Dynamic</td>
+                <td style="font-family: var(--font-mono); font-size: 13px; color: var(--orion-text-tertiary);">2 weeks ago</td>
+                <td style="text-align: right;">
+                  <button class="btn btn-ghost btn-sm manageBtn" data-name="William Bell" data-email="william@massivedynamic.com" data-initials="WB" data-color="var(--orion-surface-2)" data-role="Tenant Admin" data-tenant="Massive Dynamic" data-status="Suspended" data-status-class="badge-neutral" data-last-active="2 weeks ago">Restore</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ==============================================
+       USER SIDE PANEL
+       ============================================== -->
+  <div class="side-panel-overlay" id="userPanelOverlay"></div>
+  <aside class="side-panel" id="userSidePanel">
+    <div class="side-panel-header">
+      <div class="side-panel-title-container">
+        <div class="side-panel-title-icon" id="upIcon" style="background:var(--orion-blue); color:white; border-radius:50%;">JD</div>
+        <div>
+          <h2 class="side-panel-title" id="upName">Jane Doe</h2>
+          <p class="side-panel-subtitle">
+            <span class="badge badge-success" id="upStatusBadge" style="transform: scale(0.9); transform-origin: left center;">Active</span>
+            <span id="upEmail">jane@acmecorp.com</span>
+          </p>
+        </div>
+      </div>
+      <button class="side-panel-close" id="userPanelCloseBtn" aria-label="Close Panel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="side-panel-body">
+      <!-- Section 1: User Profile -->
+      <section>
+        <h3 class="side-panel-section-title">User Profile</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="detail-label">Role</span>
+            <span class="detail-value" id="upRole">Tenant Admin</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Associated Tenant</span>
+            <span class="detail-value" id="upTenant">Acme Corp</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Last Active</span>
+            <span class="detail-value" id="upLastActive">2 mins ago</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Member Since</span>
+            <span class="detail-value">Mar 10, 2024</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Administrative Actions -->
+      <section>
+        <h3 class="side-panel-section-title">Administrative Actions</h3>
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); border: 1px solid var(--orion-border-subtle); border-radius: var(--radius-md);">
+            <div>
+              <div style="font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--orion-text-primary);">Change Role</div>
+              <div style="font-size: var(--text-xs); color: var(--orion-text-tertiary); margin-top: 2px;">Modify user capabilities</div>
+            </div>
+            <button class="btn btn-secondary btn-sm">Edit Role</button>
+          </div>
+          
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); border: 1px solid var(--orion-border-subtle); border-radius: var(--radius-md);">
+            <div>
+              <div style="font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--orion-text-primary);">Reset Password</div>
+              <div style="font-size: var(--text-xs); color: var(--orion-text-tertiary); margin-top: 2px;">Send a password reset link</div>
+            </div>
+            <button class="btn btn-secondary btn-sm">Send Link</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Danger Zone -->
+      <section style="margin-top: auto;">
+        <div class="danger-zone">
+          <h3 class="side-panel-section-title" style="color: var(--orion-danger);">Danger Zone</h3>
+          <p style="font-size: var(--text-xs); color: var(--orion-text-secondary); margin: 0 0 var(--space-4) 0; line-height: 1.4;">
+            Suspending a user prevents login. Removing a user permanently deletes their account profile from this tenant.
+          </p>
+          <div style="display: flex; gap: var(--space-2);">
+            <button class="btn btn-secondary btn-sm" style="flex: 1; border-color: var(--orion-red-alpha-40); color: var(--orion-danger);">Suspend User</button>
+            <button class="btn btn-secondary btn-sm" style="flex: 1; border-color: var(--orion-red-alpha-40); color: var(--orion-danger);">Remove</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="side-panel-footer">
+      <button class="btn btn-primary" id="userPanelSaveBtn">Done</button>
+    </div>
+  </aside>
+
+  <!-- ==============================================
+       APP DRAWER 
+       ============================================== -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="app-drawer" id="appDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        Domain Apps
+      </div>
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-grid">
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Vision & Strategic Intent</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="3" x2="9" y2="21"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Corporate Strategy</span>
+        </a>
+
+        <a href="index.html" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Strategic Planning</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Initiative & Program Portfolio</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Business Unit Alignment</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="14" x2="23" y2="14"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Operating Model</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Financial Strategy & Budget</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Risk & Compliance Mgmt</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"></polyline>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Governance & Decision Mgmt</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <span class="drawer-app-name">KPI & Performance Mgmt</span>
+        </a>
+
+        <a href="it-strategy.html" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Executive Intelligence Dashboard</span>
+        </a>
+
+        <a href="#" class="drawer-app-card">
+          <div class="drawer-app-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+              </path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <span class="drawer-app-name">Platform & Collab Services</span>
+        </a>
+
+      </div>
+    </div>
+  </aside>
+
+  <!-- THEME AND DRAWER LOGIC -->
+  <script>
+    // Drawer Logic
+    const drawerToggleBtns = document.querySelectorAll('.drawer-toggle');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const appDrawer = document.getElementById('appDrawer');
+    const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+    function openDrawer(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      drawerOverlay.classList.add('open');
+      appDrawer.classList.add('open');
+    }
+
+    function closeDrawer() {
+      drawerOverlay.classList.remove('open');
+      appDrawer.classList.remove('open');
+    }
+
+    drawerToggleBtns.forEach(btn => btn.addEventListener('click', openDrawer));
+    drawerOverlay.addEventListener('click', closeDrawer);
+    drawerCloseBtn.addEventListener('click', closeDrawer);
+
+    // Escape key closes drawer and panel
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (appDrawer.classList.contains('open')) closeDrawer();
+        if (userSidePanel.classList.contains('open')) closeUserPanel();
+      }
+    });
+
+    // Side Panel Logic
+    const userSidePanel = document.getElementById('userSidePanel');
+    const userPanelOverlay = document.getElementById('userPanelOverlay');
+    const userPanelCloseBtn = document.getElementById('userPanelCloseBtn');
+    const userPanelSaveBtn = document.getElementById('userPanelSaveBtn');
+    
+    // Elements to update
+    const upName = document.getElementById('upName');
+    const upEmail = document.getElementById('upEmail');
+    const upIcon = document.getElementById('upIcon');
+    const upStatusBadge = document.getElementById('upStatusBadge');
+    const upRole = document.getElementById('upRole');
+    const upTenant = document.getElementById('upTenant');
+    const upLastActive = document.getElementById('upLastActive');
+
+    function openUserPanel(btn) {
+      // Update DOM with dataset values
+      upName.textContent = btn.dataset.name;
+      upEmail.textContent = btn.dataset.email;
+      upIcon.textContent = btn.dataset.initials;
+      
+      // Update avatar color properly
+      if (btn.dataset.color === 'var(--orion-surface-2)') {
+        upIcon.style.background = 'var(--orion-surface-2)';
+        upIcon.style.color = 'var(--orion-text-secondary)';
+      } else {
+        upIcon.style.background = btn.dataset.color;
+        upIcon.style.color = 'white';
+      }
+
+      upStatusBadge.textContent = btn.dataset.status;
+      upStatusBadge.className = `badge ${btn.dataset.statusClass}`;
+      upRole.textContent = btn.dataset.role;
+      upTenant.textContent = btn.dataset.tenant;
+      upLastActive.textContent = btn.dataset.lastActive;
+
+      userPanelOverlay.classList.add('open');
+      userSidePanel.classList.add('open');
+    }
+
+    function closeUserPanel() {
+      userPanelOverlay.classList.remove('open');
+      userSidePanel.classList.remove('open');
+    }
+
+    document.querySelectorAll('.manageBtn').forEach(btn => {
+      btn.addEventListener('click', (e) => openUserPanel(e.currentTarget));
+    });
+
+    userPanelOverlay.addEventListener('click', closeUserPanel);
+    userPanelCloseBtn.addEventListener('click', closeUserPanel);
+    userPanelSaveBtn.addEventListener('click', closeUserPanel);
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+    const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+    const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+    function updateIcons() {
+      const isDark = htmlEl.classList.contains('dark-theme') ||
+        (!htmlEl.classList.contains('light-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+
+    // Set initial icon state
+    updateIcons();
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = htmlEl.classList.contains('dark-theme') ||
+        (!htmlEl.classList.contains('light-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      if (isDark) {
+        htmlEl.classList.remove('dark-theme');
+        htmlEl.classList.add('light-theme');
+        localStorage.setItem('orion-theme', 'light');
+      } else {
+        htmlEl.classList.remove('light-theme');
+        htmlEl.classList.add('dark-theme');
+        localStorage.setItem('orion-theme', 'dark');
+      }
+      updateIcons();
+    });
+  </script>
+</body>
+
+</html>
